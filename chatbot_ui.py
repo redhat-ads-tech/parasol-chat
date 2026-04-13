@@ -7,7 +7,12 @@ import streamlit as st
 import requests
 import time
 import json
-import os 
+import os
+
+st.set_page_config(page_title="Parasol Chat", page_icon="☂️", layout="centered")
+st.markdown("""<style>
+.stDeployButton {display: none;}
+</style>""", unsafe_allow_html=True)
 
 model_service = os.getenv("MODEL_ENDPOINT",
                           "http://localhost:8001")
@@ -57,10 +62,27 @@ def enableInput():
 def disableInput():
     st.session_state["input_disabled"] = True
 
-st.title("💬 Chatbot")  
+PARASOL_LOGO = """<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="42" height="42">
+<path fill="#EE0000" d="M12 2C6.48 2 2 6.48 2 12h4c0-1.1.9-2 2-2s2 .9 2 2h4c0-1.1.9-2 2-2s2 .9 2 2h4c0-5.52-4.48-10-10-10z"/>
+<path fill="#EE0000" d="M13 12v7c0 1.1-.9 2-2 2s-2-.9-2-2v-1h2v1h0v-7h2z"/>
+</svg>"""
+
+st.markdown(
+    f"""
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:0.5rem;">
+        {PARASOL_LOGO}
+        <div>
+            <h1 style="margin:0;padding:0;line-height:1.1;">Parasol Chat</h1>
+            <p style="margin:0;padding:0;color:#888;font-size:0.9rem;">AI-powered assistant for Parasol Insurance</p>
+        </div>
+    </div>
+    """,
+    unsafe_allow_html=True,
+)
+
 if "messages" not in st.session_state:
-    st.session_state["messages"] = [{"role": "assistant", 
-                                     "content": "How can I help you?"}]
+    st.session_state["messages"] = [{"role": "assistant",
+                                     "content": "Welcome to Parasol Insurance! How can I help you today?"}]
 if "input_disabled" not in st.session_state:
     enableInput()
 
