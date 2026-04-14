@@ -15,8 +15,7 @@ st.markdown("""<style>
 </style>""", unsafe_allow_html=True)
 
 model_service = os.getenv("MODEL_ENDPOINT",
-                          "http://localhost:8001")
-model_service = f"{model_service}/v1"
+                          "http://localhost:8001/v1")
 model_service_bearer = os.getenv("MODEL_ENDPOINT_BEARER")
 request_kwargs = {}
 if model_service_bearer is not None:
